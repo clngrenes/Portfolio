@@ -11,6 +11,7 @@ import canvasView from '@assets/AIDEA/canvas.jpg';
 import colorMode from '@assets/AIDEA/color-mode.jpg';
 import imageMode from '@assets/AIDEA/image-mode.jpg';
 import functionView from '@assets/AIDEA/function.jpg';
+import interfaceImage from '@assets/AIDEA/realtime.jpg';
 
 export const aideaAssets = {
   cover: aideaCover,
@@ -21,6 +22,7 @@ export const aideaAssets = {
   toolsImage,
   impactVideo,
   historyStill,
+  interfaceImage,
   modes: {
     canvasView,
     colorMode,
