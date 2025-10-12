@@ -1,8 +1,6 @@
 "use client";
 
-import Image from 'next/image';
-import { ProjectSection } from '@/components/projects';
-import { aideaAssets } from '../assets';
+import { ProjectSection, VideoEmbed } from '@/components/projects';
 
 export function PrototypeSection() {
   return (
@@ -10,13 +8,13 @@ export function PrototypeSection() {
       <p>
         We wanted to know: How realistic can our prototype become today? Using ComfyUI and advanced AI models, we built a working prototype that demonstrates AIDEA&apos;s core capabilities.
       </p>
-      <figure className="aidea-media" data-animate="blur-fade" data-animate-delay="80">
-        <Image
-          src={aideaAssets.modes.canvasView}
-          alt="AIDEA prototype turning a sketch into a visual scene"
-          priority={false}
-        />
-      </figure>
+      <VideoEmbed
+        url="https://youtu.be/s7T9XYbdVTY"
+        title="AIDEA prototype walkthrough"
+        controls
+        autoPlay={false}
+        wrapperClassName="aidea-media"
+      />
       <p>
         This walkthrough shows how the prototype translates a quick sketch into a refined visualization. From the initial capture to the generated concepts, every step is explained so designers understand how the system interprets their intent.
       </p>
