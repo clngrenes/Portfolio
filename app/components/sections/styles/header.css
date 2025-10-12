@@ -42,6 +42,22 @@
   will-change: opacity, filter, transform;
 }
 
+.header-word--wide {
+  padding-inline: calc(var(--header-word-gap) * 0.9);
+}
+
+@media (max-width: 900px) {
+  .header-word--wide {
+    padding-inline: calc(var(--header-word-gap-sm) * 1.1);
+  }
+}
+
+@media (max-width: 640px) {
+  .header-word--wide {
+    padding-inline: calc(var(--header-word-gap-xs) * 1.25);
+  }
+}
+
 .header-line--italic .header-word {
   font-style: italic;
 }

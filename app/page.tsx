@@ -34,9 +34,11 @@ export default function HomePage() {
               {line.words.map((word, wordIndex) => {
                 const style = { '--word-index': wordSequenceIndex } as CSSProperties;
                 wordSequenceIndex += 1;
+                const isWideWord = word === 'AN' || word === 'PEOPLE';
+                const wordClassName = `header-word${isWideWord ? ' header-word--wide' : ''}`;
 
                 return (
-                  <span className="header-word" key={`header-word-${lineIndex}-${wordIndex}`} style={style}>
+                  <span className={wordClassName} key={`header-word-${lineIndex}-${wordIndex}`} style={style}>
                     {word}
                   </span>
                 );
