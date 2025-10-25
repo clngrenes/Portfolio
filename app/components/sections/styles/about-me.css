@@ -75,7 +75,7 @@
 
 .tools-section,
 .embedded-experience {
-  padding-inline: var(--section-padding-inline-lg);
+  padding-inline: 0;
   box-sizing: border-box;
 }
 
