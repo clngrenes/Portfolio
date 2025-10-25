@@ -17,6 +17,18 @@
 @media (max-width: 900px) { .recent-projects { padding: 0 var(--section-padding-inline-md) var(--subsection-gap); } }
 @media (max-width: 640px) { .projects-intro { font-size: var(--font-size-3); } }
 
+@media (max-width: 768px) {
+	.recent-projects {
+		padding-left: 16px !important;
+		padding-right: 16px !important;
+	}
+
+	.projects-container {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
 .project-card-link { text-decoration: none; display: block; }
 
 .project-card {

@@ -75,3 +75,9 @@
   .myko-card, .myko-agent { padding: var(--section-padding-inline-sm); }
   .myko-visual { margin: 0; }
 }
+
+@media (max-width: 768px) {
+  .myko-visual {
+    margin: var(--space-paragraph-content) 0;
+  }
+}

@@ -176,6 +176,23 @@
 	--font-size-cv: 1rem;
 }
 
+:where(.site-section) {
+	padding-inline: var(--section-padding-inline-lg);
+	box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+	:where(.site-section) {
+		padding-inline: var(--section-padding-inline-md);
+	}
+}
+
+@media (max-width: 768px) {
+	:where(.site-section) {
+		padding-inline: 16px;
+	}
+}
+
 html,
 body {
 	margin: 0 !important;

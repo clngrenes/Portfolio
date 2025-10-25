@@ -70,7 +70,13 @@
 @media (max-width: 768px) {
   #faq-section,
   .faq-section {
-    padding: 0 var(--section-padding-inline-sm);
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .faq-list {
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .faq-item { padding:18px 0; }

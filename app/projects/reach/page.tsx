@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type CSSProperties } from 'react';
 import Image from 'next/image';
 import { ProjectSection, ProjectShell, SectionDivider } from '@/components/projects';
 import logo from '@assets/LOGO/logo.svg';
@@ -185,7 +185,7 @@ export default function ReachProject() {
               <button
                 key={hex}
                 className="reach-palette-item"
-                style={{ backgroundColor: hex }}
+                style={{ '--reach-swatch-color': hex } as CSSProperties}
                 data-contrast={contrast}
                 type="button"
                 aria-label={`${label} – ${role}`}

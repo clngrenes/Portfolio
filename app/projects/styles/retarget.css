@@ -14,15 +14,32 @@
 
 .retarget-grid { display:grid; gap:32px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); margin-top:32px; }
 
-.retarget-palette { display:flex; gap:16px; margin:var(--space-paragraph-content) 0; }
-.retarget-palette-item { flex:1; min-height:140px; border-radius:18px; position:relative; overflow:hidden; cursor:pointer; transition:flex .35s cubic-bezier(0.22, 0.61, 0.36, 1), border-radius .35s cubic-bezier(0.22, 0.61, 0.36, 1), opacity .3s ease; box-shadow:inset 0 0 0 1px rgba(var(--text-title-rgb),0.06); }
+.retarget-palette {
+  display: flex;
+  gap: 16px;
+  margin: var(--space-paragraph-content) 0;
+  flex-wrap: nowrap;
+  overflow: visible;
+}
+
+.retarget-palette-item {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 140px;
+  border-radius: 18px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: flex .35s ease, border-radius .3s ease, opacity .3s ease;
+  box-shadow: inset 0 0 0 1px rgba(var(--text-title-rgb),0.06);
+}
 .retarget-palette-item[data-contrast='dark'] { box-shadow:inset 0 0 0 1px rgba(var(--text-title-rgb),0.12); }
 .retarget-palette-item::after { content:""; position:absolute; inset:0; background:radial-gradient(circle at top left, rgba(255,255,255,0.08), rgba(0,0,0,0.35)); opacity:0; transition:opacity .3s ease; }
 .retarget-palette-item[data-contrast='dark']::after { background:linear-gradient(135deg, rgba(17,24,50,0.22), rgba(17,24,50,0.08)); }
 .retarget-palette-item .retarget-palette-label { position:absolute; left:18px; right:18px; bottom:18px; border-radius:14px; padding:12px 14px; background:rgba(0,0,0,0.64); color:#fff; display:flex; flex-direction:column; gap:4px; font-size:14px; letter-spacing:0.2px; opacity:0; transform:translateY(10px); transition:opacity .25s ease, transform .25s ease; pointer-events:none; backdrop-filter:blur(12px); }
 .retarget-palette-item[data-contrast='dark'] .retarget-palette-label { background:rgba(17,24,50,0.82); color:#fff; border:1px solid rgba(var(--text-title-rgb),0.12); }
-.retarget-palette-item .retarget-palette-label span { font-size:12px; opacity:0.78; letter-spacing:0.6px; text-transform:uppercase; }
-.retarget-palette-item:hover { flex:1.45; border-radius:26px; }
+.retarget-palette-item .retarget-palette-label span { font-size:12px; opacity:0.72; letter-spacing:0.22em; text-transform:uppercase; }
+.retarget-palette-item:hover { flex: 1.35 1 0; border-radius:24px; }
 .retarget-palette-item:hover::after { opacity:0.75; }
 .retarget-palette-item:hover .retarget-palette-label { opacity:1; transform:translateY(0); }
 .retarget-palette-note { margin-top:0; font-size:15px; line-height:1.65; color:var(--text-paragraph); }
@@ -44,7 +61,7 @@
 }
 
 @media (max-width:720px){
-  .retarget-palette { flex-direction:column; }
+  .retarget-palette { gap:12px; }
   .retarget-palette-item { min-height:110px; }
-  .retarget-palette-item:hover { transform:none; }
+  .retarget-palette-item:hover { flex: 1.2 1 0; }
 }

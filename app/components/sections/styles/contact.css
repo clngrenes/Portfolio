@@ -175,7 +175,17 @@ textarea.form-input {
   }
 }
 
-.form-feedback { margin:0; padding:var(--section-padding-inline-sm); border-radius:8px; text-align:center; transition:all .3s ease; }
+.form-feedback {
+  margin: 0;
+  padding: var(--section-padding-inline-sm);
+  border-radius: 8px;
+  text-align: center;
+  transition: all .3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
 
 .success-message {
   color: var(--color-9);
@@ -224,10 +234,28 @@ textarea.form-input {
 }
 
 
-.submit-button { width:100%; max-width:800px; background-color: var(--input-bg) !important; color: var(--text-title) !important; border:none !important; border-radius:8px; padding:var(--section-padding-inline-sm) var(--section-padding-inline-md); font-size: var(--font-size-md); font-weight:500; cursor:pointer; transition: background-color .25s, transform .15s; min-height:52px; display:flex; align-items:center; justify-content:center; margin:0; box-sizing:border-box; }
+.submit-button {
+  width: 100%;
+  max-width: 800px;
+  background-color: var(--btn-primary-bg) !important;
+  color: var(--btn-primary-text) !important;
+  border: none !important;
+  border-radius: 10px;
+  padding: var(--section-padding-inline-sm) var(--section-padding-inline-md);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color .25s ease, transform .15s ease;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  box-sizing: border-box;
+}
 
 .submit-button:hover:not(:disabled) {
-  background-color: rgba(var(--text-title-rgb),0.12) !important;
+  background-color: var(--btn-primary-hover) !important;
   transform: translateY(-1px);
 }
 
@@ -238,17 +266,23 @@ textarea.form-input {
 }
 
 .submit-button:disabled {
-  opacity: 0.6;
+  background-color: rgba(var(--text-title-rgb), 0.18) !important;
+  color: rgba(var(--text-title-rgb), 0.62) !important;
+  opacity: 1;
   cursor: not-allowed;
 }
 
 .submit-button:disabled:hover {
-  background-color: var(--input-bg);
+  background-color: rgba(var(--text-title-rgb), 0.18) !important;
   transform: none;
 }
 
 @media (max-width: 768px) {
-  .contact-section { padding: 0 20px; }
+  .contact-section { padding-left: 16px !important; padding-right: 16px !important; }
+  .contact-grid {
+    padding-left: 0;
+    padding-right: 0;
+  }
   .form-row { gap:18px; }
   .form-label { font-size: var(--font-size-sm); }
   .form-input, select.form-input, textarea.form-input { padding:16px 18px; font-size: var(--font-size-md); margin:0; }

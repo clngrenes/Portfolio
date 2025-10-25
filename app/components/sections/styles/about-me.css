@@ -1,4 +1,4 @@
-.about-me { max-width:800px; width:100%; margin-inline:auto; padding:0 var(--section-padding-inline-lg); position:relative; overflow:visible; box-sizing:border-box; }
+.about-me { max-width:800px; width:100%; margin-inline:auto; padding-inline: var(--section-padding-inline-lg); position:relative; overflow:visible; box-sizing:border-box; }
 
 .section-title { text-align:left; font-size:var(--font-size-2); margin:0; }
 .about-me.site-section .section-title + * { margin-top: var(--space-paragraph-content) !important; }
@@ -72,6 +72,31 @@
 }
 
 .tools-section { max-width:800px; margin-inline:auto; width:100%; font-family: var(--font-primary); margin-top: var(--subsection-gap); }
+
+.tools-section,
+.embedded-experience {
+  padding-inline: var(--section-padding-inline-lg);
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .tools-section,
+  .embedded-experience {
+    padding-inline: var(--section-padding-inline-md);
+  }
+}
+
+@media (max-width: 768px) {
+  .tools-section,
+  .embedded-experience {
+    padding-inline: 16px;
+  }
+
+  .tools-section,
+  .embedded-experience {
+    padding-inline: 16px;
+  }
+}
 
 .tools-section .section-title + .tools-grid { margin-top: var(--space-paragraph-content) !important; }
 
@@ -277,11 +302,40 @@
   }
 }
 
+@media (max-width: 900px) {
+  .about-me {
+    padding-inline: var(--section-padding-inline-md);
+  }
+
+  .about-me > .section-title,
+  .about-me > .about-me__text {
+    padding-inline: 0;
+  }
+}
+
+@media (max-width: 900px) and (min-width: 769px) {
+  .tools-section,
+  .embedded-experience {
+    padding-inline: 0;
+  }
+}
+
 @media (max-width: 768px) {
+  .tools-section,
+  .embedded-experience {
+    padding-inline: var(--section-padding-inline-sm);
+  }
+
+  .about-me > .section-title,
+  .about-me__text,
+  .about-me > .about-me__text {
+    padding-inline: var(--section-padding-inline-sm);
+  }
+
   .about-me {
     margin-top: var(--section-spacing-y);
     margin-bottom: var(--section-spacing-y);
-    padding: 0 var(--section-padding-inline-sm);
+    padding-inline: 16px;
   }
 
   .about-me__container {
@@ -322,7 +376,7 @@
   .about-me {
     margin-top: var(--section-spacing-y);
     margin-bottom: var(--section-spacing-y);
-    padding: 0 var(--section-padding-inline-sm);
+    padding-inline: 16px;
   }
 
   .section-title { font-size: var(--font-size-2); margin-bottom: var(--space-paragraph-content); }
@@ -338,7 +392,7 @@
 
 @media (max-width: 480px) {
   .about-me {
-    padding: 0 var(--section-padding-inline-sm);
+    padding-inline: 16px;
   }
 
   .about-me__container {

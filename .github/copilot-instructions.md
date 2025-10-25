@@ -1,36 +1,29 @@
-# Copilot Instructions
+## Project Snapshot
+- Next.js 14 App Router app lives in `app/`; `app/layout.tsx` wires fonts, metadata, the global blur-fade observer, and base styles from `app/components/layout/base.css` (imports Tailwind preflight + project tokens).
+- Home sections sit in `app/components/sections/` and are mounted by `app/page.tsx`; most files start with `'use client';` because scroll/animation hooks rely on the browser.
+- Primary navigation comes from `app/components/navigation/FixedNavigation.tsx`; it maps IDs in `navigationTabs` (e.g. `recent-projects`, `about-me`) to observed sections, so keep IDs stable when adding or reordering content.
+- Project case studies live under `app/projects/<slug>/`; each `page.tsx` wraps content in `<ProjectShell>` from `app/components/projects/index.tsx` and wires a `LeftProjectNavigation` sidebar.
 
-## Fast overview
-- Next.js 14 App Router project; global shell lives in `app/layout.tsx` and imports `app/components/layout/base.css` for CSS variables, Tailwind preflight, and typography.
-- Landing page content is composed in `app/page.tsx` from section components under `app/components/sections`; stick to the `site-section` class to inherit spacing rules from `app/styles/layout.css`.
+## Styling & Assets
+- Global spacing, type ramps, and CSS variables are defined in `app/styles/layout.css`; tweak tokens there instead of scattering hard-coded values.
+- Section-specific CSS lives beside components in `app/components/**/styles/`; import the needed file at the top of each component rather than using Tailwind utility classes.
+- Static media is stored in `ASSETS/` and pulled in via the `@assets/*` alias; `@/*` resolves to `app/*` (see `tsconfig.json`).
+- `global.d.ts` declares modules for images/video so TypeScript accepts `import hero from '@assets/PULSE/posters.jpg';` without extra typing work.
 
-## Styling, motion, accessibility
-- Animations rely on the `[data-animate="blur-fade"]` pattern plus `BlurFadeObserver` (see `app/components/layout/BlurFadeObserver.tsx`); add the data attribute and optional `data-animate-delay` instead of new animation hooks.
-- `app/styles/layout.css` defines all spacing, typography, and color tokens—reuse those CSS variables before adding new values.
-- Base styles re-export Tailwind v4 utilities, but the codebase favors handcrafted CSS classes; only reach for Tailwind utilities already exposed via `layout.css` helpers.
-- Maintain `aria-*` attributes already present (e.g., FAQ list roles, carousel buttons) when editing interactive components.
+## Animation & Interaction Patterns
+- `app/components/layout/BlurFadeObserver.tsx` auto-observes nodes marked with `data-animate="blur-fade"` and optional `data-animate-delay`; tag new elements to inherit the reveal effect.
+- `FixedNavigation` and `LeftProjectNavigation` both depend on IntersectionObserver; avoid removing the hidden radio inputs or `aria` attributes that support focus states.
+- `LeftProjectNavigation` derives anchors from `legacySectionMap` when given a `projectType`; ensure each `<ProjectSection>` sets `anchor`/`id` matching that map (e.g. `ProjectSection anchor="pulse-research"`).
+- Use `<SectionDivider />` between project sections for consistent spacing and scroll tracking; the divider also doubles as a nav anchor target.
 
-## Navigation contracts
-- The sticky tab bar in `app/components/navigation/FixedNavigation.tsx` watches section IDs (`recent-projects`, `about-me`, `insights`, `contact-section`); update `navigationTabs` if you rename sections.
-- Project and insight detail pages use `LeftProjectNavigation` (`app/components/navigation/LeftProjectNavigation.tsx`) to build sidebars. Add new anchors through the `legacySectionMap` or pass a custom `items` prop when sections change.
+## Project Components
+- `ProjectShell` accepts an optional `cover` with image or video props; videos go through `VideoEmbed`, which rewrites YouTube/Vimeo URLs and handles autoplay/loop flags.
+- `ProjectMeta` inside `ProjectShell` auto-groups entries; labels listed in `inlineMetaLabels` render inline, so prefer those keys (`Year`, `Team`) for concise summaries.
+- Galleries use `MediaCarousel` (`app/components/projects/MediaCarousel.tsx`); pass `autoPlay={false}` if motion should pause and mind the CSS vars it emits for thumbnail grids.
+- Shared survey charts and cards for the Pulse project live in `app/components/projects/SurveyStats.tsx`; edit the data arrays there instead of duplicating markup.
 
-## Project & insight shells
-- `ProjectShell` and helpers in `app/components/projects/index.tsx` wrap every case study; use `ProjectSection` so the `data-project-anchor` attribute stays in sync with the sidebar.
-- Cover media can be a static image or video: set `cover.video = true` to automatically route through `VideoEmbed` which resolves YouTube/Vimeo URLs and local files.
-- Insight articles (`app/insights/**/page.tsx`) reuse the same shell; components in `app/insights/components` provide ready-made sections (`SpotifySections`, etc.).
-- Unpublished insight routes can return `notFound()` (see `app/insights/choice-overload-ai/page.tsx`).
-
-## Contact workflow
-- The contact form (`app/components/sections/Contact.tsx`) posts via EmailJS using `NEXT_PUBLIC_EMAILJS_SERVICE_ID`, `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`, and `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY`; without these env vars it falls back to a simulated delay.
-- Keep the honeypot `company` field and `aria-live` feedback when changing validation or status handling.
-
-## Assets & media
-- Import imagery and video through the `@assets` alias configured in `next.config.js`; supported file types are declared in `global.d.ts` so TypeScript knows about them.
-- When adding new media folders, follow the existing `ASSETS/<PROJECT>` naming and reference files via static imports to benefit from Next Image optimization.
-
-## Tooling & expectations
-- Package manager is pnpm (`pnpm-lock.yaml`); use `pnpm install`, `pnpm dev`, `pnpm build`, and `pnpm lint`.
-- TypeScript is `strict`; introduce new client components with a leading `'use client'` directive whenever they touch state, effects, or browser APIs.
-- Prefer extending existing section data arrays (e.g., project lists in `Projects.tsx`, FAQ items) rather than hardcoding JSX duplicates.
-- No automated tests are configured; rely on `pnpm lint` and a manual Next preview when verifying changes.
-- For additional libraries, update `package.json` and commit the regenerated lockfile.
+## Forms, Builds & Env
+- `app/components/sections/Contact.tsx` posts via EmailJS; set `NEXT_PUBLIC_EMAILJS_SERVICE_ID`, `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`, and `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY` in `.env.local`. Without them the form simulates success but does not send mail.
+- Preserve the hidden `company` honeypot field in the contact form; it prevents spam submissions.
+- Install dependencies with `pnpm install`, run locally via `pnpm dev`, lint with `pnpm lint`, and create production builds using `pnpm build` followed by `pnpm start` for smoke tests.
+- No automated tests exist; rely on manual verification plus linting when introducing new interactive flows.

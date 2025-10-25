@@ -187,13 +187,13 @@ export default function LeftProjectNavigation({ items, projectType }: LeftProjec
 			<div id="mobile-project-nav" className={`mobile-nav-drawer ${drawerOpen ? 'open' : ''}`} role="dialog" aria-modal={drawerOpen}>
 				<div className="mobile-nav-backdrop" onClick={() => setDrawerOpen(false)} />
 				<div className="mobile-nav-panel">
-					<nav className="nav-container" aria-label="Section navigation" data-animate="blur-fade" data-animate-delay="120">
+					<nav className="nav-container" aria-label="Section navigation">
 						<ul className="nav-list">{renderItems(true)}</ul>
 					</nav>
 				</div>
 			</div>
 
-			<aside className={`left-project-nav ${visible ? 'visible' : ''}`} data-animate="blur-fade" data-animate-delay="60">
+			<aside className={`left-project-nav ${visible ? 'visible' : ''}`}>
 				<nav className="nav-container" aria-label="Section navigation">
 					<ul className="nav-list">{renderItems(false)}</ul>
 				</nav>
